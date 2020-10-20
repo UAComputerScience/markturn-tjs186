@@ -51,3 +51,11 @@ target_link_libraries(markturn_static PUBLIC ${JSON_LIBRARY})
 target_link_libraries(markturn_static PUBLIC ${YAML_LIBRARY})
 
 target_link_libraries(markturn PUBLIC markturn_static)
+
+# Shared library for markturn
+add_library(markturn_shared SHARED $<TARGET_OBJECTS:library_source_object>)
+target_link_libraries(markturn_shared PUBLIC ${LIBXML2_LIBRARY})
+target_link_libraries(markturn_shared PUBLIC ${JSON_LIBRARY})
+target_link_libraries(markturn_shared PUBLIC ${YAML_LIBRARY})
+
+target_link_libraries(markturn PUBLIC markturn_shared)
