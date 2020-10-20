@@ -44,4 +44,10 @@ target_include_directories(library_source_object PUBLIC ${LIBXML2_INCLUDE_DIR})
 target_include_directories(library_source_object PUBLIC ${JSON_DIR})
 target_include_directories(library_source_object PUBLIC ${YAML_DIR})
 
+# Static Library for markturn
+add_library(markturn_static STATIC $<TARGET_OBJECTS:library_source_object>)
+target_link_libraries(markturn_static PUBLIC ${LIBXML2_LIBRARY})
+target_link_libraries(markturn_static PUBLIC ${JSON_LIBRARY})
+target_link_libraries(markturn_static PUBLIC ${YAML_LIBRARY})
 
+target_link_libraries(markturn PUBLIC markturn_static)
