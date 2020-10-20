@@ -14,6 +14,20 @@ find_package(LibXml2 REQUIRED)
 message("-- LibXml2 include: " ${LIBXML2_INCLUDE_DIR})
 message("-- LibXml2 library: " ${LIBXML2_LIBRARY})
 
+#find YAML
+find_package(yaml-cpp REQUIRED)
+set(YAML_DIR "/usr/include/yaml-cpp")
+set(YAML_LIBRARY "/usr/lib/x86_64-linux-gnu/libyaml-cpp.so")
+message("-- YAML include: " ${YAML_DIR})
+message("-- YAML library: " ${YAML_LIBRARY})
+
+#Find JSON
+find_package(jsoncpp REQUIRED)
+set(JSON_DIR "/usr/include/jsoncpp")
+set(JSON_LIBRARY "/usr/lib/x86_64-linux-gnu/libjsoncpp.so")
+message("-- JSON include: " ${JSON_DIR})
+message("-- JSON library: " ${JSON_LIBRARY})
+
 #
 set(LIB_INCLUDE_DIRS ${LIBXML2_INCLUDE_DIR})
 
