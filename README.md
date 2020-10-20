@@ -1,4 +1,4 @@
-# convert
+# markturn
 
 Convert is a command-line tool and library for text data conversion.
 The primary purpose are languages used for text data, such as:
@@ -12,19 +12,19 @@ The primary purpose are languages used for text data, such as:
 Convert from XML to JSON:
 
 ```console
-convert data.xml -o data.json
+markturn data.xml -o data.json
 ```
 
-Convert from JSON to XML:
+markturn from JSON to XML:
 
 ```console
-convert data.json -o data.xml
+markturn data.json -o data.xml
 ```
 
-Convert from a URL:
+markturn from a URL:
 
 ```console
-convert https::/github.com/jjkdljau8y8 -o data.xml
+markturn https::/github.com/jjkdljau8y8 -o data.xml
 ```
 
-The library, libconvert, provides a C-interface.
+The library, libmarkturn, provides a C-interface.

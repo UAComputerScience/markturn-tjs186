@@ -1,17 +1,17 @@
 /*
-    convert.cpp
+    markturn.cpp
 
-    Client program for the convert utility
+    Client program for the libmarkturn utility
 */
 
 #include <CLI11.hpp>
-#include "convert.hpp"
+#include "markturn.hpp"
 #include <curl/curl.h>
 
 int main(int argc, char* argv[]) {
 
     // command-line parsing
-    CLI::App app{"Convert among data formats"};
+    CLI::App app{"markturn among data formats"};
 
     std::string filename = "default";
     app.add_option("-f,--file", filename, "A help string");
@@ -20,7 +20,7 @@ int main(int argc, char* argv[]) {
 
     // ...
 
-    // Conversions using libconvert
+    // Conversions using libmarkturn
 
     return 0;
 }
