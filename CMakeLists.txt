@@ -34,7 +34,6 @@ set(LIB_INCLUDE_DIRS ${LIBXML2_INCLUDE_DIR})
 # Build markturn
 set(MAIN_SOURCE "src/markturn.cpp")
 add_executable(markturn ${MAIN_SOURCE})
-target_link_libraries(markturn PUBLIC libmarkturn)
 target_link_libraries(markturn PUBLIC ${CURL_LIBRARY})
 
 # global libraries
@@ -42,4 +41,7 @@ file(GLOB Library_Source "src/*Format.cpp" "src/libmarkturn.cpp")
 
 add_library(library_source_object OBJECT ${Library_Source})
 target_include_directories(library_source_object PUBLIC ${LIBXML2_INCLUDE_DIR})
+target_include_directories(library_source_object PUBLIC ${JSON_DIR})
+target_include_directories(library_source_object PUBLIC ${YAML_DIR})
+
 
