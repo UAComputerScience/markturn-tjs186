@@ -4,6 +4,8 @@ cmake_minimum_required(VERSION 3.18.4)
 
 project(markturn VERSION "1.0.0")
 
+option(LINK_STATIC "Build with static library" OFF)
+
 #find curl
 find_package(CURL REQUIRED)
 message("-- curl include: " ${CURL_INCLUDE_DIR})
@@ -50,7 +52,7 @@ target_link_libraries(markturn_static PUBLIC ${LIBXML2_LIBRARY})
 target_link_libraries(markturn_static PUBLIC ${JSON_LIBRARY})
 target_link_libraries(markturn_static PUBLIC ${YAML_LIBRARY})
 
-target_link_libraries(markturn PUBLIC markturn_static)
+
 
 # Shared library for markturn
 add_library(markturn_shared SHARED $<TARGET_OBJECTS:library_source_object>)
@@ -58,4 +60,12 @@ target_link_libraries(markturn_shared PUBLIC ${LIBXML2_LIBRARY})
 target_link_libraries(markturn_shared PUBLIC ${JSON_LIBRARY})
 target_link_libraries(markturn_shared PUBLIC ${YAML_LIBRARY})
 
-target_link_libraries(markturn PUBLIC markturn_shared)
+
+
+if(LINK_STATIC)
+	message("-- Use Static")
+	target_link_libraries(markturn PUBLIC markturn_static)
+else()
+	message("-- Use Shared")
+	target_link_libraries(markturn PUBLIC markturn_shared)
+endif()
