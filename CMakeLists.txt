@@ -35,9 +35,10 @@ set(MAIN_SOURCE "src/markturn.cpp")
 add_executable(markturn ${MAIN_SOURCE})
 target_link_libraries(markturn PUBLIC ${CURL_LIBRARY})
 
-# global libraries
+# glob libraries
 file(GLOB Library_Source "src/*Format.cpp" "src/libmarkturn.cpp")
 
+#create library object
 add_library(library_source_object OBJECT ${Library_Source})
 target_include_directories(library_source_object PUBLIC ${LIBXML2_INCLUDE_DIR})
 target_include_directories(library_source_object PUBLIC ${JSON_DIR})
@@ -58,6 +59,7 @@ target_link_libraries(markturn_shared PUBLIC ${JSON_LIBRARY})
 target_link_libraries(markturn_shared PUBLIC ${YAML_LIBRARY})
 install(TARGETS markturn_shared LIBRARY)
 
+#option for shared or static libraries
 if(LINK_STATIC)
 	message("-- Use Static")
 	target_link_libraries(markturn PUBLIC markturn_static)
@@ -70,6 +72,7 @@ install(TARGETS markturn RUNTIME)
 enable_testing()
 file(GLOB Test_Source "test/*.cpp")
 
+# Generate test files
 foreach(TESTFILE ${Test_Source})
     get_filename_component(TEST_NAME ${TESTFILE} NAME_WLE)
     add_executable(${TEST_NAME} ${TESTFILE})
