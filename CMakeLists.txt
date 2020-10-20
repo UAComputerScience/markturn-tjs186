@@ -30,9 +30,6 @@ set(JSON_LIBRARY "/usr/lib/x86_64-linux-gnu/libjsoncpp.so")
 message("-- JSON include: " ${JSON_DIR})
 message("-- JSON library: " ${JSON_LIBRARY})
 
-#
-set(LIB_INCLUDE_DIRS ${LIBXML2_INCLUDE_DIR})
-
 # Build markturn
 set(MAIN_SOURCE "src/markturn.cpp")
 add_executable(markturn ${MAIN_SOURCE})
@@ -83,3 +80,4 @@ foreach(TESTFILE ${Test_Source})
     message("-- test added ${TEST_NAME}")
 
 endforeach()
+Include(CPack)
