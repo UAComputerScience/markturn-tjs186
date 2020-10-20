@@ -60,8 +60,6 @@ target_link_libraries(markturn_shared PUBLIC ${LIBXML2_LIBRARY})
 target_link_libraries(markturn_shared PUBLIC ${JSON_LIBRARY})
 target_link_libraries(markturn_shared PUBLIC ${YAML_LIBRARY})
 
-
-
 if(LINK_STATIC)
 	message("-- Use Static")
 	target_link_libraries(markturn PUBLIC markturn_static)
@@ -69,3 +67,17 @@ else()
 	message("-- Use Shared")
 	target_link_libraries(markturn PUBLIC markturn_shared)
 endif()
+
+enable_testing()
+file(GLOB Test_Source "test/*.cpp")
+
+foreach(TESTFILE ${Test_Source})
+    get_filename_component(TEST_NAME ${TESTFILE} NAME_WLE)
+    add_executable(${TEST_NAME} ${TESTFILE})
+    target_include_directories(${TEST_NAME} PUBLIC src)
+    target_include_directories(${TEST_NAME} PUBLIC ${LIBXML2_INCLUDE_DIR})
+    target_link_libraries(${TEST_NAME} PUBLIC ${LIBXML2_LIBRARY})
+    add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
+    message("-- test added ${TEST_NAME}")
+
+endforeach()
