@@ -18,17 +18,28 @@ message("-- LibXml2 library: " ${LIBXML2_LIBRARY})
 
 #find YAML
 find_package(yaml-cpp REQUIRED)
-set(YAML_DIR "/usr/include/yaml-cpp")
-set(YAML_LIBRARY "/usr/lib/x86_64-linux-gnu/libyaml-cpp.so")
-message("-- YAML include: " ${YAML_DIR})
-message("-- YAML library: " ${YAML_LIBRARY})
+find_path(YAML_DIR NAMES yaml-cpp PATHS /usr/include/)
+find_path(YAML_LIBRARY NAMES libyaml-cpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr/lib64/)
+set(YAML ${YAML_DIR}/yaml-cpp)
+set(YAML_LIBRARY_DIR ${YAML_LIBRARY}/libyaml-cpp.so)
+message("-- YAML include: " ${YAML})
+message("-- YAML library: " ${YAML_LIBRARY_DIR})
 
 #Find JSON
 find_package(jsoncpp REQUIRED)
-set(JSON_DIR "/usr/include/jsoncpp")
-set(JSON_LIBRARY "/usr/lib/x86_64-linux-gnu/libjsoncpp.so")
-message("-- JSON include: " ${JSON_DIR})
-message("-- JSON library: " ${JSON_LIBRARY})
+find_path(JSON_DIR NAMES jsoncpp json PATHS /usr/include)
+find_path(JSON_LIBRARY NAMES libjsoncpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr/lib64/)
+
+if(DISTRO MATCHES "Fedora")
+	set(JSON ${JSON_DIR}/json)
+else()
+	set(JSON ${JSON_DIR}/jsoncpp)
+endif()
+
+set(JSON_LIBRARY_DIR ${JSON_LIBRARY}/libjsoncpp.so)
+message("-- JSON include: " ${JSON})
+message("-- JSON library: " ${JSON_LIBRARY_DIR})
+
 
 # Build markturn
 set(MAIN_SOURCE "src/markturn.cpp")
