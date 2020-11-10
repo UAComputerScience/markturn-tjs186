@@ -302,4 +302,17 @@ Systemd allows for services/programs to run upon machine start up. These can be 
 -create a file with a .service extention in the /etc/systemd/system/ directory.
 -example process:
 ```
+[Unit]
+Description= Markturn
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/Markturn
+[Install]
+WantedBy=multi-user.target
 ```
