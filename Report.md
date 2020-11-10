@@ -3,14 +3,14 @@
  tjs186@zips.uakron.edu
 # Table of Contents
 
-#### [development Activities](#development-Activities-1)
+#### [Development Activities](#development-Activities-1)
 - [Coding](#Coding)
 - [Debugging](#Debugging)
 - [Building](#Building)
 - [Testing](#Testing)
 - [Installation](#Installation)
 
-#### [Tools for development](#tools-for-development-1)
+#### [Tools for Development](#tools-for-development-1)
 - [Bash aliases and functions](#bash-aliases-and-functions)
 - [git, GitHub and alternatives](#git-github-and-alternatives)
 - [Make](#make)
@@ -22,7 +22,7 @@
 - [Docker Compose](#docker-compose)
 - [systemd and other init tools](#systemd-and-other-init-tools)
 
-# development Activities
+# Development Activities
 
 ## Coding
 When it comes to coding, the first thing a programmer(or team of programmers) should consider before anything else is a version control system
