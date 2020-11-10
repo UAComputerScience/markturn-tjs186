@@ -6,6 +6,8 @@ project(markturn VERSION "1.0.0")
 
 option(LINK_STATIC "Build with static library" OFF)
 
+# @NOTE Inconsistent comments. Some have spaces after the #, some don't.
+# @NOTE Some are capitalized, some aren't. Be consistent.
 #find curl
 find_package(CURL REQUIRED)
 message("-- curl include: " ${CURL_INCLUDE_DIR})
@@ -20,6 +22,7 @@ message("-- LibXml2 library: " ${LIBXML2_LIBRARY})
 find_package(yaml-cpp REQUIRED)
 find_path(YAML_DIR NAMES yaml-cpp PATHS /usr/include/)
 find_path(YAML_LIBRARY NAMES libyaml-cpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr/lib64/)
+# @NOTE Name of YAML is not descriptive. Follow the example given by YAML_LIBRARY_DIR
 set(YAML ${YAML_DIR}/yaml-cpp)
 set(YAML_LIBRARY_DIR ${YAML_LIBRARY}/libyaml-cpp.so)
 message("-- YAML include: " ${YAML})
@@ -30,6 +33,7 @@ find_package(jsoncpp REQUIRED)
 find_path(JSON_DIR NAMES jsoncpp json PATHS /usr/include)
 find_path(JSON_LIBRARY NAMES libjsoncpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr/lib64/)
 
+# @NOTE Comment missing
 if(DISTRO MATCHES "Fedora")
 	set(JSON ${JSON_DIR}/json)
 else()
@@ -40,13 +44,14 @@ set(JSON_LIBRARY_DIR ${JSON_LIBRARY}/libjsoncpp.so)
 message("-- JSON include: " ${JSON})
 message("-- JSON library: " ${JSON_LIBRARY_DIR})
 
-
+# @NOTE Why this extra blank line here?
 # Build markturn
 set(MAIN_SOURCE "src/markturn.cpp")
 add_executable(markturn ${MAIN_SOURCE})
 target_link_libraries(markturn PUBLIC ${CURL_LIBRARY})
 
 # glob libraries
+# @NOTE Your aren't globbing libraries. You are globbing files in a library
 file(GLOB Library_Source "src/*Format.cpp" "src/libmarkturn.cpp")
 
 #create library object
@@ -62,7 +67,7 @@ target_link_libraries(markturn_static PUBLIC ${JSON_LIBRARY})
 target_link_libraries(markturn_static PUBLIC ${YAML_LIBRARY})
 install(TARGETS markturn_static LIBRARY)
 
-
+# @NOTE Why this extra blank line?
 # Shared library for markturn
 add_library(markturn_shared SHARED $<TARGET_OBJECTS:library_source_object>)
 target_link_libraries(markturn_shared PUBLIC ${LIBXML2_LIBRARY})
@@ -81,7 +86,7 @@ endif()
 install(TARGETS markturn RUNTIME)
 
 enable_testing()
-file(GLOB Test_Source "test/*.cpp")
+file(GLOB Test_Source "test/*.cpp") # @NOTE This is part of "Generate test files", so put it there
 
 # Generate test files
 foreach(TESTFILE ${Test_Source})
@@ -94,4 +99,5 @@ foreach(TESTFILE ${Test_Source})
     message("-- test added ${TEST_NAME}")
 
 endforeach()
-Include(CPack)
+Include(CPack) # @NOTE SO is this include part of the "Generate test files"? No. Put a blank line between them.
+# @NOTE Leave a single, blank line at the end of the file
