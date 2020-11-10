@@ -63,7 +63,10 @@ Installation is equally as important as anything else because if a program canno
 - [cmake](#cmake) to configure CPack in the CMakeLists.txt file.
 - [cpack](#cpack) in order to create package distributions for the software.
 - [docker](#docker) to test the installations in general(and in different OS).
-- apt install in order to install the package generated. (apt install name_of_package)
+- apt install in order to install the package generated. (apt install name_of_package):
+```
+$ apt install Package_name # to install package
+```
 
 
 # Tools for Developement
