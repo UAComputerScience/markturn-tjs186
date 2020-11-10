@@ -3,14 +3,14 @@
  tjs186@zips.uakron.edu
 # Table of Contents
 
-#### [Developement Activities](#developement-Activities-1)
+#### [development Activities](#development-Activities-1)
 - [Coding](#Coding)
 - [Debugging](#Debugging)
 - [Building](#Building)
 - [Testing](#Testing)
 - [Installation](#Installation)
 
-#### [Tools for Developement](#tools-for-developement-1)
+#### [Tools for development](#tools-for-development-1)
 - [Bash aliases and functions](#bash-aliases-and-functions)
 - [git, GitHub and alternatives](#git-github-and-alternatives)
 - [Make](#make)
@@ -22,18 +22,18 @@
 - [Docker Compose](#docker-compose)
 - [systemd and other init tools](#systemd-and-other-init-tools)
 
-# Developement Activities
+# development Activities
 
 ## Coding
 When it comes to coding, the first thing a programmer(or team of programmers) should consider before anything else is a version control system
 i.e. [git, GitHub and alternatives](#git-github-and-alternatives).
-Version control is critical to any software developement project but is 
+Version control is critical to any software development project but is 
 especially important when it comes to managing large teams. Version Control allows a team of developers to work simultaneously without interfering with the work of one another. Vesion Control also allows real-time changes to files within the system and a complete retracing system in order to retrace any previous versions of files and/or releases. 
 
 When coding in a project, useful tools are those associated with [building](#Building) the program(to make sure it compiles...ect) and [Bash aliases and functions](#bash-aliases-and-functions) to create tools to aid in the coding process. For example, while coding a good idea is to implement the code in steps, after each step, compiling and running(maybe using commmand automation) and committing to github. It is never a good idea to attempt to implement all of the source code in one 'go'(i.e. starting with a blank script and implementing everything at once without building and committing).
 
 ## Debugging
-Debugging is the process of identifying and removing errors from computer hardware or software. There are many tools useful for debugging during software  developement:
+Debugging is the process of identifying and removing errors from computer hardware or software. There are many tools useful for debugging during software  development:
 -[Bash aliases and functions](#bash-aliases-and-functions) can be used in order to repeatedly compile and run without having to type a series of commands each time. Also, this inherently helps eliminate command line errors while debugging. Often times, Compiler messages will point out errors however, in the case that the information provided is not exactly useful; using bash functions and aliases can help cut the time spent resolving the issue. 
 
 -[git, GitHub and alternatives](#git-github-and-alternatives) can be used in scenarios where it is neccesary to revert to older releases, or previous commits while debugging. 
@@ -49,7 +49,7 @@ When building a program, there are many useful tools to aid in that process:
 
 
 ## Testing
-Testing is exactly as it sounds, every developement project should involve multiple layers of testing in order to properly ensure all processes perform as intended. Testing should be taken particularly seriously for this reason.
+Testing is exactly as it sounds, every development project should involve multiple layers of testing in order to properly ensure all processes perform as intended. Testing should be taken particularly seriously for this reason.
 
 There are many tools that are extremely useful for testing:
 - [Bash aliases and functions](#bash-aliases-and-functions) can be extremely helpful in terms of workflow while testing. Creating Aliases and/or Bash functions in order to eliminate the need to retype long commands to compile, run, mount repositories using [docker](#docker)..ect. This is one of the easiest tools to use for testing and one of the most effective.
@@ -59,7 +59,7 @@ There are many tools that are extremely useful for testing:
 - [ctest](#ctest) in enable a 'make test' or 'ninja test' to test the program using predefined testing scenarios within the CMakeLists.txt of the project.
 
 ## Installation
-Installation is equally as important as anything else because if a program cannot be installed correctly, it is useless to everyone else. Tools useful in the Installation developement process include:
+Installation is equally as important as anything else because if a program cannot be installed correctly, it is useless to everyone else. Tools useful in the Installation development process include:
 - [cmake](#cmake) to configure CPack in the CMakeLists.txt file.
 - [cpack](#cpack) in order to create package distributions for the software.
 - [docker](#docker) to test the installations in general(and in different OS).
@@ -69,10 +69,10 @@ $ apt install Package_name # to install package
 ```
 
 
-# Tools for Developement
+# Tools for development
 
 ### _Bash aliases and functions_
-Bash aliases and functions are a form of command automation. Command automation is possible with the use of certain Command line interfaces(commonly refered to as "shells") and is used to automate the use of commands. There are a large number of CLIs but bash is (probably) the most common. Common approaches to command automation is the use of Configuration files, Aliases, Environment variables and Shell functions. When using command automation, it is important to follow common(best) practices. The command automation must also be repeatable and reduce the cognitive load. For example, It is incredibly useful to create a bash alias for a series of commands used repeatedly(without the need to change them every time) during developement activities. Bash aliasing is not useful for one-time uses and will end up costing more time than it is saving in that case.
+Bash aliases and functions are a form of command automation. Command automation is possible with the use of certain Command line interfaces(commonly refered to as "shells") and is used to automate the use of commands. There are a large number of CLIs but bash is (probably) the most common. Common approaches to command automation is the use of Configuration files, Aliases, Environment variables and Shell functions. When using command automation, it is important to follow common(best) practices. The command automation must also be repeatable and reduce the cognitive load. For example, It is incredibly useful to create a bash alias for a series of commands used repeatedly(without the need to change them every time) during development activities. Bash aliasing is not useful for one-time uses and will end up costing more time than it is saving in that case.
 
 ##### Bash Aliases
 Bash Aliases are a user created command in the bash shell that can rename a command or perform a series of commands. Useful for personalization and also to save time when entering long commands or a series of commands repeatedly.
@@ -102,7 +102,7 @@ $ fun word
 word
 ```
 ### _git, GitHub and alternatives_
-Git, GitHub and alternatives fall into the version control category. Version control is essential to modern day developement. version control allows for a developer or team of developers to record and control changes to a file or file system and refer to previous versions of the file or file system. Git is the most widely used version control system created by Linus Torvalds in 2005. Common commands for git:
+Git, GitHub and alternatives fall into the version control category. Version control is essential to modern day development. version control allows for a developer or team of developers to record and control changes to a file or file system and refer to previous versions of the file or file system. Git is the most widely used version control system created by Linus Torvalds in 2005. Common commands for git:
 ```
 $ git add [NameOfFile] # to add a file to a repository
 $ git commit -am "commit message containing details of changes"
@@ -222,7 +222,7 @@ $ cpack -G DEB # for Debian based OS systems
 $ # -G indicates the type of package to generate (DEB for debian)
 ```
 ### _Docker_
-Docker is a platform for developers to build, run and distribute applications with containers. Containerization is the use of containers to deploy applications and is a term commonly associated with docker-one of the most influential tools used in developement. Docker can containerize very complex applications efficiently and effectively.
+Docker is a platform for developers to build, run and distribute applications with containers. Containerization is the use of containers to deploy applications and is a term commonly associated with docker-one of the most influential tools used in development. Docker can containerize very complex applications efficiently and effectively.
 Docker images are containers that include their own private file system and OS. Docker images can be set up and run easily and are extremely portable, meaning they can be built locally, deployed to the cloud and run anywhere there is internet access. In order to create an image, first install docker then create what is called a Dockerfile.
 - first create a Dockerfile (no extension) using something like 'touch' or 'subl' ...ect.
 - This is an example of a Dockerfile to create a docker image with an Ubuntu OS and various commands(to create a c++ build environment for markturn) it will run upon creation.
