@@ -142,7 +142,7 @@ $ ninja clean # removes executables
 ```
 
 ### _cmake_
-Cmake is a tool to manage the construction of source code. CMake was originally in conjuction to [Make](#make) and only used to generate Makefiles. However, CMake in its current form can be used in conjuction with [ninja](#ninja) and others like Visual Studio and Xcode. 
+Cmake is a tool to manage the construction of build files. CMake was originally developed to create [Make](#make) files and was only used to generate Makefiles. However, CMake in its current form can be used in conjunction with [ninja](#ninja) and others like Visual Studio and Xcode.
 
 Example using cmake with bash:
 ```
