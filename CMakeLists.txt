@@ -35,12 +35,12 @@ find_path(JSON_LIBRARY NAMES libjsoncpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr
 # for Fedora distrobution
 
 if(DISTRO MATCHES "Fedora")
-    set(JSONCPP_FULL_DIR ${JSONCPP_DIR}/json)
+    set(JSONCPP_FULL_DIR ${JSON_DIR}/json)
     message("-- FEDORA")
 else()
-    set(JSONCPP_FULL_DIR ${JSONCPP_DIR}/jsoncpp)
+    set(JSONCPP_FULL_DIR ${JSON_DIR}/jsoncpp)
 endif()
-set(JSONCPP_LIBRARY_FULL_PATH ${JSONCPP_LIBRARY_DIR}/libjsoncpp.so)
+set(JSONCPP_LIBRARY_FULL_PATH ${JSON_LIBRARY}/libjsoncpp.so)
 message("-- JSON include: " ${JSONCPP_FULL_DIR})
 message("-- JSON library: " ${JSONCPP_LIBRARY_FULL_PATH})
 
@@ -64,7 +64,7 @@ file(GLOB LIBRARY_SOURCES "src/*Format.cpp" "src/libmarkturn.cpp")
 # Create object of all library formats and libmarkturn
 add_library(library_sources_obj OBJECT ${LIBRARY_SOURCES})
 target_include_directories(library_sources_obj PUBLIC ${LIBXML2_INCLUDE_DIR})
-target_include_directories(library_sources_obj PUBLIC ${YAML_CPP_FULL_DIR})
+target_include_directories(library_sources_obj PUBLIC ${YAML})
 target_include_directories(library_sources_obj PUBLIC ${JSONCPP_FULL_DIR})
 
 # Static markturn_static Library
