@@ -23,8 +23,8 @@ find_package(yaml-cpp REQUIRED)
 find_path(YAML_CPP_DIR NAMES yaml-cpp PATHS /usr/include/)
 find_path(YAML_CPP_LIBRARY_DIR NAMES libyaml-cpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr/lib64/)
 # @NOTE Name of YAML is not descriptive. Follow the example given by YAML_LIBRARY_DIR
-set(YAML ${YAML_DIR}/yaml-cpp)
-set(YAML_LIBRARY_DIR ${YAML_LIBRARY}/libyaml-cpp.so)
+set(YAML ${YAML_CPP_DIR}/yaml-cpp)
+set(YAML_LIBRARY_DIR ${YAML_CPP_LIBRARY_DIR}/libyaml-cpp.so)
 message("-- YAML include: " ${YAML})
 message("-- YAML library: " ${YAML_LIBRARY_DIR})
 
