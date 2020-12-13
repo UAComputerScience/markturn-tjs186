@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.18.4)
 
 project(markturn VERSION "1.0.0")
 
-option(LINK_STATIC "Build with static library" OFF)
+option(LINK_STATIC "Build with static library" ON)
 
 # @NOTE Inconsistent comments. Some have spaces after the #, some don't.
 # @NOTE Some are capitalized, some aren't. Be consistent.
