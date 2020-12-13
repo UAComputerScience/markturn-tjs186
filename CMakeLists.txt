@@ -20,8 +20,8 @@ message("-- LibXml2 library: " ${LIBXML2_LIBRARY})
 
 #find YAML
 find_package(yaml-cpp REQUIRED)
-find_path(YAML_DIR NAMES yaml-cpp PATHS /usr/include/)
-find_path(YAML_LIBRARY NAMES libyaml-cpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr/lib64/)
+find_path(YAML_CPP_DIR NAMES yaml-cpp PATHS /usr/include/)
+find_path(YAML_CPP_LIBRARY_DIR NAMES libyaml-cpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr/lib64/)
 # @NOTE Name of YAML is not descriptive. Follow the example given by YAML_LIBRARY_DIR
 set(YAML ${YAML_DIR}/yaml-cpp)
 set(YAML_LIBRARY_DIR ${YAML_LIBRARY}/libyaml-cpp.so)
@@ -32,72 +32,67 @@ message("-- YAML library: " ${YAML_LIBRARY_DIR})
 find_package(jsoncpp REQUIRED)
 find_path(JSON_DIR NAMES jsoncpp json PATHS /usr/include)
 find_path(JSON_LIBRARY NAMES libjsoncpp.so PATHS /usr/lib/x86_64-linux-gnu/ /usr/lib64/)
+# for Fedora distrobution
 
-# @NOTE Comment missing
 if(DISTRO MATCHES "Fedora")
-	set(JSON ${JSON_DIR}/json)
+    set(JSONCPP_FULL_DIR ${JSONCPP_DIR}/json)
+    message("-- FEDORA")
 else()
-	set(JSON ${JSON_DIR}/jsoncpp)
+    set(JSONCPP_FULL_DIR ${JSONCPP_DIR}/jsoncpp)
 endif()
+set(JSONCPP_LIBRARY_FULL_PATH ${JSONCPP_LIBRARY_DIR}/libjsoncpp.so)
+message("-- JSON include: " ${JSONCPP_FULL_DIR})
+message("-- JSON library: " ${JSONCPP_LIBRARY_FULL_PATH})
 
-set(JSON_LIBRARY_DIR ${JSON_LIBRARY}/libjsoncpp.so)
-message("-- JSON include: " ${JSON})
-message("-- JSON library: " ${JSON_LIBRARY_DIR})
-
-# @NOTE Why this extra blank line here?
-# Build markturn
-set(MAIN_SOURCE "src/markturn.cpp")
-add_executable(markturn ${MAIN_SOURCE})
+#
+set(MARKTURN_EXE "src/markturn.cpp")
+add_executable(markturn ${MARKTURN_EXE})
 target_link_libraries(markturn PUBLIC ${CURL_LIBRARY})
 
-# glob libraries
-# @NOTE Your aren't globbing libraries. You are globbing files in a library
-file(GLOB Library_Source "src/*Format.cpp" "src/libmarkturn.cpp")
-
-#create library object
-add_library(library_source_object OBJECT ${Library_Source})
-target_include_directories(library_source_object PUBLIC ${LIBXML2_INCLUDE_DIR})
-target_include_directories(library_source_object PUBLIC ${JSON_DIR})
-target_include_directories(library_source_object PUBLIC ${YAML_DIR})
-
-# Static Library for markturn
-add_library(markturn_static STATIC $<TARGET_OBJECTS:library_source_object>)
-target_link_libraries(markturn_static PUBLIC ${LIBXML2_LIBRARY})
-target_link_libraries(markturn_static PUBLIC ${JSON_LIBRARY})
-target_link_libraries(markturn_static PUBLIC ${YAML_LIBRARY})
-install(TARGETS markturn_static LIBRARY)
-
-# @NOTE Why this extra blank line?
-# Shared library for markturn
-add_library(markturn_shared SHARED $<TARGET_OBJECTS:library_source_object>)
-target_link_libraries(markturn_shared PUBLIC ${LIBXML2_LIBRARY})
-target_link_libraries(markturn_shared PUBLIC ${JSON_LIBRARY})
-target_link_libraries(markturn_shared PUBLIC ${YAML_LIBRARY})
-install(TARGETS markturn_shared LIBRARY)
-
-#option for shared or static libraries
 if(LINK_STATIC)
-	message("-- Use Static")
+	message("-- Using Static Library")
 	target_link_libraries(markturn PUBLIC markturn_static)
 else()
-	message("-- Use Shared")
+	message("-- Using Shared Library")
 	target_link_libraries(markturn PUBLIC markturn_shared)
 endif()
 install(TARGETS markturn RUNTIME)
 
-enable_testing()
-file(GLOB Test_Source "test/*.cpp") # @NOTE This is part of "Generate test files", so put it there
+# GLOB Libraries
+file(GLOB LIBRARY_SOURCES "src/*Format.cpp" "src/libmarkturn.cpp")
 
-# Generate test files
-foreach(TESTFILE ${Test_Source})
+# Create object of all library formats and libmarkturn
+add_library(library_sources_obj OBJECT ${LIBRARY_SOURCES})
+target_include_directories(library_sources_obj PUBLIC ${LIBXML2_INCLUDE_DIR})
+target_include_directories(library_sources_obj PUBLIC ${YAML_CPP_FULL_DIR})
+target_include_directories(library_sources_obj PUBLIC ${JSONCPP_FULL_DIR})
+
+# Static markturn_static Library
+add_library(markturn_static STATIC $<TARGET_OBJECTS:library_sources_obj>)
+target_link_libraries(markturn_static PUBLIC ${LIBXML2_LIBRARY})
+target_link_libraries(markturn_static PUBLIC ${YAML_CPP_LIBRARY_FULL_PATH})
+target_link_libraries(markturn_static PUBLIC ${JSONCPP_LIBRARY_FULL_PATH})
+install(TARGETS markturn_static LIBRARY)
+
+# shared markturn_shared library
+add_library(markturn_shared SHARED $<TARGET_OBJECTS:library_sources_obj>)
+target_link_libraries(markturn_shared PUBLIC ${LIBXML2_LIBRARY})
+target_link_libraries(markturn_shared PUBLIC ${YAML_CPP_LIBRARY_FULL_PATH})
+target_link_libraries(markturn_shared PUBLIC ${JSONCPP_LIBRARY_FULL_PATH})
+install(TARGETS markturn_shared LIBRARY)
+
+# 
+enable_testing()
+file(GLOB TEST_SOURCES "test/*.cpp")
+foreach(TESTFILE ${TEST_SOURCES})
     get_filename_component(TEST_NAME ${TESTFILE} NAME_WLE)
+    message("-- Adding test ${TEST_NAME}")
     add_executable(${TEST_NAME} ${TESTFILE})
-    target_include_directories(${TEST_NAME} PUBLIC src)
     target_include_directories(${TEST_NAME} PUBLIC ${LIBXML2_INCLUDE_DIR})
+    target_include_directories(${TEST_NAME} PUBLIC src)
     target_link_libraries(${TEST_NAME} PUBLIC ${LIBXML2_LIBRARY})
     add_test(NAME ${TEST_NAME} COMMAND ${TEST_NAME})
-    message("-- test added ${TEST_NAME}")
 
 endforeach()
-Include(CPack) # @NOTE SO is this include part of the "Generate test files"? No. Put a blank line between them.
-# @NOTE Leave a single, blank line at the end of the file
+
+Include(CPack)
