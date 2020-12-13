@@ -62,20 +62,20 @@ install(TARGETS markturn RUNTIME)
 file(GLOB LIBRARY_SOURCES "src/*Format.cpp" "src/libmarkturn.cpp")
 
 # Create object of all library formats and libmarkturn
-add_library(library_sources_obj OBJECT ${LIBRARY_SOURCES})
-target_include_directories(library_sources_obj PUBLIC ${LIBXML2_INCLUDE_DIR})
-target_include_directories(library_sources_obj PUBLIC ${YAML})
-target_include_directories(library_sources_obj PUBLIC ${JSONCPP_FULL_DIR})
+add_library(library_source_object OBJECT ${LIBRARY_SOURCES})
+target_include_directories(library_source_object PUBLIC ${LIBXML2_INCLUDE_DIR})
+target_include_directories(library_source_object PUBLIC ${YAML})
+target_include_directories(library_source_object PUBLIC ${JSONCPP_FULL_DIR})
 
 # Static markturn_static Library
-add_library(markturn_static STATIC $<TARGET_OBJECTS:library_sources_obj>)
+add_library(markturn_static STATIC $<TARGET_OBJECTS:library_source_object>)
 target_link_libraries(markturn_static PUBLIC ${LIBXML2_LIBRARY})
 target_link_libraries(markturn_static PUBLIC ${YAML_CPP_LIBRARY_FULL_PATH})
 target_link_libraries(markturn_static PUBLIC ${JSONCPP_LIBRARY_FULL_PATH})
 install(TARGETS markturn_static LIBRARY)
 
 # shared markturn_shared library
-add_library(markturn_shared SHARED $<TARGET_OBJECTS:library_sources_obj>)
+add_library(markturn_shared SHARED $<TARGET_OBJECTS:library_source_object>)
 target_link_libraries(markturn_shared PUBLIC ${LIBXML2_LIBRARY})
 target_link_libraries(markturn_shared PUBLIC ${YAML_CPP_LIBRARY_FULL_PATH})
 target_link_libraries(markturn_shared PUBLIC ${JSONCPP_LIBRARY_FULL_PATH})
@@ -96,3 +96,5 @@ foreach(TESTFILE ${TEST_SOURCES})
 endforeach()
 
 Include(CPack)
+SET(CPACK_DEBIAN_PACKAGE_MAINTAINER, "Thomas Sutyak")
+SET(CPACK_DEBIAN_CONTACT, "tjs186@zips.uakron.edu")
