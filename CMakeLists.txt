@@ -96,5 +96,4 @@ foreach(TESTFILE ${TEST_SOURCES})
 endforeach()
 
 Include(CPack)
-SET(CPACK_DEBIAN_PACKAGE_MAINTAINER, "Thomas Sutyak")
-SET(CPACK_DEBIAN_CONTACT, "tjs186@zips.uakron.edu")
+SET(CPACK_DEBIAN_CONTACT "tjs186@zips.uakron.edu <tjs186@zips.uakron.edu>")
